@@ -75,7 +75,7 @@ class Dataloder():
         testset = MINCDataloder(config.dataset_path, 
             config.eval_source, transform=transform_test)
 
-        kwargs = {'num_workers': 8, 'pin_memory': True}
+        kwargs = {'num_workers': 0, 'pin_memory': True}
         trainloader = torch.utils.data.DataLoader(trainset, batch_size=
             config.batch_size, shuffle=True, **kwargs)
         testloader = torch.utils.data.DataLoader(testset, batch_size=
