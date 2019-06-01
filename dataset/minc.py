@@ -77,7 +77,7 @@ class Dataloder():
         trainloader = torch.utils.data.DataLoader(trainset, batch_size=
             config.batch_size, shuffle=True, **kwargs)
         testloader = torch.utils.data.DataLoader(testset, batch_size=
-            config.test_batch_size, shuffle=False, **kwargs)
+            config.batch_size, shuffle=False, **kwargs)
         self.classes = trainset.classes
         self.trainloader = trainloader 
         self.testloader = testloader
