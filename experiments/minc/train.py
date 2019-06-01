@@ -5,8 +5,9 @@ import argparse
 
 import torch
 from config import config
-from network import GTN
-from minc import Dataloder
+from model.GTN import GTN
+from dataset.minc import Dataloder
+from util import *
 
 # global variable
 best_pred = 0.0
@@ -19,9 +20,9 @@ def adjust_learning_rate(optimizer, epoch, best_pred):
     if (epoch-1) % config.lr_decay == 0:
         print('LR is set to {}'.format(lr))
     if epoch <=20:
-        for param_group in optimizer.param_groups[:-9]:
+        for param_group in optimizer.param_groups[:2]:
             param_group['lr'] = 0
-        for param_group in optimizer.param_groups[-9:]:
+        for param_group in optimizer.param_groups[2:]:
             param_group['lr'] = lr
     else:
         for param_group in optimizer.param_groups:
@@ -43,14 +44,11 @@ def main():
     # criterion and optimizer
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.SGD([
-        {'params': model.aux.parameters()},
-        {'params': model.efc1.parameters()},
-        {'params': model.erelu1.parameters()},
-        {'params': model.dp.parameters()},
-        {'params': model.efc2.parameters()},
-        {'params': model.en2.parameters(), 'lr': config.lr*10},
-        {'params': model.dp2.parameters(), 'lr': config.lr*10},
+        {'params': model.feature_extract.parameters()},
+        {'params': model.layer4.parameters()},
+        {'params': model.auxlayer.parameters(), 'lr': config.lr*10},
         {'params': model.fc.parameters(), 'lr': config.lr*10},
+        {'params': model.classify.parameters(), 'lr': config.lr*10},
         ], 
         lr=config.lr, momentum=config.momentum,
         weight_decay=config.weight_decay)
@@ -117,14 +115,14 @@ def main():
             is_best = True
 
             
-        save_checkpoint({
-            'epoch': epoch,
-            'state_dict': model.state_dict(),
-            'optimizer': optimizer.state_dict(),
-            'best_pred': best_pred,
-            'errlist_train':errlist_train,
-            'errlist_val':errlist_val,
-            }, config=config, is_best=is_best)
+        # save_checkpoint({
+        #     'epoch': epoch,
+        #     'state_dict': model.state_dict(),
+        #     'optimizer': optimizer.state_dict(),
+        #     'best_pred': best_pred,
+        #     'errlist_train':errlist_train,
+        #     'errlist_val':errlist_val,
+        #     }, config=config, is_best=is_best)
 
     for epoch in range(config.nepochs):
         print('Epoch:', epoch)

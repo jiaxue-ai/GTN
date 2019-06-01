@@ -46,7 +46,7 @@ def add_path(path):
 add_path(osp.join(C.root_dir))
 
 """Image Config"""
-C.num_classes = 19
+C.num_classes = 23
 C.image_mean = np.array([0.485, 0.456, 0.406])
 C.image_std = np.array([0.229, 0.224, 0.225])
 
