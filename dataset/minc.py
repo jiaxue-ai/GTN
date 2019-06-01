@@ -33,6 +33,8 @@ def make_dataset(filename, datadir, class_to_idx):
 class MINCDataloder(data.Dataset):
     def __init__(self, root, filename, transform=None):
         classes, class_to_idx = find_classes(root + '/images')
+        self.classes = classes
+        self.class_to_idx = class_to_idx
         self.transform = transform
         self.images, self.labels = make_dataset(filename, root, 
             class_to_idx)
