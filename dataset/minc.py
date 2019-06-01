@@ -32,8 +32,8 @@ def make_dataset(filename, datadir, class_to_idx):
 
 class MINCDataloder(data.Dataset):
     def __init__(self, root, filename, transform=None):
+        classes, class_to_idx = find_classes(root + '/images')
         self.transform = transform
-
         self.images, self.labels = make_dataset(filename, root, 
             class_to_idx)
         assert (len(self.images) == len(self.labels))
@@ -73,7 +73,7 @@ class Dataloder():
             config.train_source, transform=transform_train)
         testset = MINCDataloder(config.dataset_path, 
             config.eval_source, transform=transform_test)
-        print(len(testset))
+
         kwargs = {'num_workers': 8, 'pin_memory': True}
         trainloader = torch.utils.data.DataLoader(trainset, batch_size=
             config.batch_size, shuffle=True, **kwargs)
