@@ -129,4 +129,5 @@ def main():
         train(epoch)
         test(epoch)
 
-
+if __name__ == "__main__":
+    main()
