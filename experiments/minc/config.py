@@ -31,9 +31,9 @@ C.link_val_log_file = C.log_dir + '/val_last.log'
 C.dataset_path = "/home/jia/Downloads/database/minc-2500/"
 C.img_root_folder = C.dataset_path
 C.gt_root_folder = C.dataset_path
-C.train_source = osp.join(C.dataset_path, "train1.txt")
-C.eval_source = osp.join(C.dataset_path, "test1.txt")
-C.test_source = osp.join(C.dataset_path, "test1.txt")
+C.train_source = osp.join(C.dataset_path, "labels/train1.txt")
+C.eval_source = osp.join(C.dataset_path, "labels/test1.txt")
+C.test_source = osp.join(C.dataset_path, "labels/test1.txt")
 C.is_test = False
 
 """Path Config"""

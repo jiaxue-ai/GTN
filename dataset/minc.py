@@ -58,7 +58,6 @@ class Dataloder():
             transforms.Resize(256),
             transforms.RandomResizedCrop(224),
             transforms.RandomHorizontalFlip(),
-            # transforms.ColorJitter(0.4,0.4,0.4),
             transforms.ToTensor(),
             normalize,
         ])
