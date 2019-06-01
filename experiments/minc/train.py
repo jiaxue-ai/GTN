@@ -5,6 +5,7 @@ import argparse
 
 import torch
 import torch.nn as nn
+import torch.optim as optim
 from config import config
 from model.GTN import GTN
 from dataset.minc import Dataloder
