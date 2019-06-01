@@ -43,7 +43,7 @@ def add_path(path):
         sys.path.insert(0, path)
 
 
-add_path(osp.join(C.root_dir))
+add_path(C.root_dir)
 
 """Image Config"""
 C.num_classes = 23

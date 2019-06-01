@@ -7,7 +7,7 @@ import torch
 from config import config
 from model.GTN import GTN
 from dataset.minc import Dataloder
-from util import *
+from utils import *
 
 # global variable
 best_pred = 0.0
