@@ -8,14 +8,13 @@ import torch.nn as nn
 import torch.optim as optim
 from config import config
 from model.GTN import GTN
-from dataset.minc import Dataloder
+from dataset.cub200 import Dataloder
 from utils import *
 
 # global variable
 best_pred = 0.0
 errlist_train = []
 errlist_val = []
-
 
 def adjust_learning_rate(optimizer, epoch, best_pred):
     lr = config.lr * (0.1 ** max(0, (epoch - 1) // config.lr_decay))
@@ -108,7 +107,7 @@ def main():
                     acc, total-correct, total))
 
         # if args.eval:
-        #     print('Acc rate is %.3f'%acc)
+        #     print('Acc rate is %.3f' % acc)
         #     return
 
         # save checkpoint
@@ -117,7 +116,6 @@ def main():
             best_pred = acc 
             is_best = True
 
-            
         save_checkpoint({
             'epoch': epoch,
             'state_dict': model.state_dict(),

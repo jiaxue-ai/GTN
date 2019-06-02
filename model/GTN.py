@@ -9,7 +9,7 @@ class Flatten(nn.Module):
         return x
 
 class GTN(nn.Module):
-    def __init__(self, out_planes, pretrained = False, reduction = 16):
+    def __init__(self, out_planes, pretrained=False, reduction=16):
         super(GTN, self).__init__()
         ResNet = models.resnet50(pretrained=pretrained)
         self.feature_extract = nn.Sequential(

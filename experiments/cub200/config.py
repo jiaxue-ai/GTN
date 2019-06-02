@@ -15,7 +15,7 @@ C.seed = 0
 
 """please config ROOT_dir and user when u first using"""
 C.repo_name = 'GTN'
-C.dataset = 'MINC'
+C.dataset = 'CUB200'
 C.model = 'ResNet50'
 C.abs_dir = osp.realpath(".")
 C.this_dir = C.abs_dir.split(osp.sep)[-1]
@@ -30,12 +30,12 @@ C.val_log_file = C.log_dir + '/val_' + exp_time + '.log'
 C.link_val_log_file = C.log_dir + '/val_last.log'
 
 """Data Dir and Weight Dir"""
-C.dataset_path = "/home/jia/Downloads/database/minc-2500/"
+C.dataset_path = "/media/yyhome/second/CUB200/CUB_200_2011/CUB_200_2011"
 C.img_root_folder = C.dataset_path
 C.gt_root_folder = C.dataset_path
-C.train_source = osp.join(C.dataset_path, "labels/train1.txt")
-C.eval_source = osp.join(C.dataset_path, "labels/test1.txt")
-C.test_source = osp.join(C.dataset_path, "labels/test1.txt")
+C.split_info1 = osp.join(C.dataset_path, "images.txt")
+C.split_info2 = osp.join(C.dataset_path, "train_test_split.txt")
+# C.test_source = osp.join(C.dataset_path, "labels/test1.txt")
 C.is_test = False
 
 """Path Config"""
@@ -48,7 +48,7 @@ def add_path(path):
 add_path(C.root_dir)
 
 """Image Config"""
-C.num_classes = 23
+C.num_classes = 200
 C.image_mean = np.array([0.485, 0.456, 0.406])
 C.image_std = np.array([0.229, 0.224, 0.225])
 
