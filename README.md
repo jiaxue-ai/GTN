@@ -1,10 +1,11 @@
 This is the official PyTorch implementation of the paper:
 
-```
 [Gated Transfer Network for Transfer Learning](https://arxiv.org/abs/1810.12521)
+
 [Yi Zhu](https://sites.google.com/view/yizhu/home) and [Jia Xue](http://jiaxueweb.com/) and [Shawn Newsam](http://faculty.ucmerced.edu/snewsam/)
+
 ACCV 2018
-```
+
 
 # Installation
 
