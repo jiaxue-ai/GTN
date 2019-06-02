@@ -1,9 +1,10 @@
 This is the official PyTorch implementation of the paper:
 
+```
 [Gated Transfer Network for Transfer Learning](https://arxiv.org/abs/1810.12521)
 [Yi Zhu](https://sites.google.com/view/yizhu/home) and [Jia Xue](http://jiaxueweb.com/) and [Shawn Newsam](http://faculty.ucmerced.edu/snewsam/)
 ACCV 2018
-
+```
 
 # Installation
 
@@ -18,7 +19,7 @@ pip install easydict
 
 # Data Preparation
 
-Please see [datasets README]() for more details. 
+Please see [datasets README](https://github.com/jiaxue1993/GTN/tree/master/dataset) for more details. 
 
 # Experiments 
 
@@ -37,9 +38,11 @@ Other experiments are similar except some hyper-parameter changes.
 
 If you use this code for your research, please consider citing our paper:
 
+```
 @inproceedings{zhu2018GTN,
   author    = {Yi Zhu and Jia Xue and Shawn Newsam},
   title     = {Gated Transfer Network for Transfer Learning},
   booktitle = {Asian Conference on Computer Vision (ACCV)},
   year      = {2018}
 }
+```
