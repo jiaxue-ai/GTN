@@ -6,56 +6,40 @@ from torchvision import transforms
 from PIL import Image
 import os
 import os.path
-import random
 
 
-def find_classes(dir):
-    classes = [d for d in os.listdir(dir) if os.path.isdir(os.path.join(dir, d))]
-    classes.sort()
-    class_to_idx = {classes[i]: i for i in range(len(classes))}
-    return classes, class_to_idx
-
-
-def make_dataset(filename, datadir, class_to_idx):
+def make_dataset(filename, datadir, category):
     images = []
     labels = []
     with open(os.path.join(filename), "r") as lines:
         for line in lines:
-            info = line.split()
-            _image = info[0]
-            _class = _image.split('_')[1]
-            _length = info[1]
-            _label = info[2]
-            images.append((_image, _class))
-            labels.append((_length, _label))
+            info = line.split(',')
+            _path = info[0]
+            _cat = info[1]
+            _classes = info[2]
+
+            if _cat == category:
+                _image = os.path.join(datadir, _path)
+                assert os.path.isfile(_image)
+                label = _classes.find('y')
+                images.append(_image)
+                labels.append(label)
 
     return images, labels
 
 
-class UCF101Dataloder(data.Dataset):
-    def __init__(self, root, filename, transform=None):
-        classes, class_to_idx = find_classes(root + '/frames')
+class FashionAIDataloder(data.Dataset):
+    def __init__(self, root, images, labels, transform=None):
         self.root = root
-        self.classes = classes
-        self.class_to_idx = class_to_idx
+        self.images = images
+        self.labels = labels
         self.transform = transform
-        self.images, self.labels = make_dataset(filename, root, class_to_idx)
-        # print(len(self.images), len(self.labels))
         assert (len(self.images) == len(self.labels))
 
     def __getitem__(self, index):
-        clip_name = self.images[index][0]
-        class_name = self.images[index][1]
-        clip_path = os.path.join(self.root, 'frames', class_name, clip_name)
-
-        _length = self.labels[index][0]
-        _label = int(self.labels[index][1])
-        frame_num = random.randint(1, int(_length))
-        image_name = 'image_%04d.jpg' % (frame_num)
-        image_path = os.path.join(clip_path, image_name)
-
+        image_path = os.path.join(self.root, self.images[index])
         _img = Image.open(image_path).convert('RGB')
-
+        _label = self.labels[index]
         if self.transform is not None:
             _img = self.transform(_img)
 
@@ -83,17 +67,24 @@ class Dataloder():
             normalize,
         ])
 
-        trainset = UCF101Dataloder(config.dataset_path, 
-            config.train_source, transform=transform_train)
-        testset = UCF101Dataloder(config.dataset_path, 
-            config.test_source, transform=transform_test)
+        all_images, all_labels = make_dataset(config.train_source, config.dataset_path, config.category)
+        split_ratio = 0.8
+        cut = int(len(all_images) * split_ratio)
+        train_images = all_images[:cut]
+        train_labels = all_labels[:cut]
+        val_images = all_images[cut:]
+        val_labels = all_labels[cut:]
+        # print(len(train_images), len(train_labels), len(val_images), len(val_labels))
+        
+        trainset = FashionAIDataloder(config.dataset_path, train_images, train_labels, transform=transform_train)
+        testset = FashionAIDataloder(config.dataset_path, val_images, val_labels, transform=transform_test)
 
         kwargs = {'num_workers': 0, 'pin_memory': True}
         trainloader = torch.utils.data.DataLoader(trainset, batch_size=
             config.batch_size, shuffle=True, **kwargs)
         testloader = torch.utils.data.DataLoader(testset, batch_size=
             config.batch_size, shuffle=False, **kwargs)
-        self.classes = trainset.classes
+        # self.classes = trainset.classes
         self.trainloader = trainloader 
         self.testloader = testloader
     

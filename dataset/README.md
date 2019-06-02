@@ -16,6 +16,8 @@ Data preparation can be found [here](https://github.com/bryanyzhu/two-stream-pyt
 
 Download the dataset from [here](https://tianchi.aliyun.com/competition/entrance/231649/information). 
 
+Directly unzip the downloaded dataset, no further actions needed.
+
 
 # MINC
 

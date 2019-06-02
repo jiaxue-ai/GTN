@@ -24,15 +24,15 @@ Please see [datasets README](https://github.com/jiaxue1993/GTN/tree/master/datas
 
 # Experiments 
 
-We take XXX as an example. 
+We take CUB200 as an example in the experiments folder, other experiments are similar except some hyper-parameter changes. 
 
+- Set config.py correctly (dataset path, hyper-paramters, etc.)
 
-- train
+- `python train.py`
 
-- evaluate
+- Evaluation is done on-the-fly. 
 
-
-Other experiments are similar except some hyper-parameter changes. 
+Note that, the evaluation performance on UCF101 is not the final results because it is a video dataset. If you need the final clip-level results, you need to perform aggregation (example script can be found [here](https://github.com/bryanyzhu/two-stream-pytorch/tree/master/scripts/eval_ucf101_pytorch)).
 
 
 # Citation
