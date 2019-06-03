@@ -21,9 +21,18 @@ Directly unzip the downloaded dataset, no further actions needed.
 
 # MINC
 
+Download the dataset from [here](http://opensurfaces.cs.cornell.edu/publications/minc/#download). 
+
+Directly unzip the downloaded dataset, no further actions needed. 
 
 # MIT67
 
+Download the dataset and Train/Test split from [here](http://web.mit.edu/torralba/www/indoor.html). 
+
+Create a **labels** folder in the root dir of the unziped dataset, move the Train/Test split into the folder
 
 # DTD
 
+Download the dataset from [here](https://www.robots.ox.ac.uk/~vgg/data/dtd/index.html#citation). 
+
+Directly unzip the downloaded dataset, no further actions needed. 
